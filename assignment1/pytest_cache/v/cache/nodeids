@@ -1,0 +1,12 @@
+[
+  "assignment1-test.py::test_calc",
+  "assignment1-test.py::test_data_type_conversion",
+  "assignment1-test.py::test_grade",
+  "assignment1-test.py::test_greet",
+  "assignment1-test.py::test_hangman",
+  "assignment1-test.py::test_hello",
+  "assignment1-test.py::test_pig_latin",
+  "assignment1-test.py::test_repeat",
+  "assignment1-test.py::test_student_scores",
+  "assignment1-test.py::test_titleize"
+]
