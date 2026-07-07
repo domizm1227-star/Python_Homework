@@ -133,7 +133,6 @@ def pig_latin(text):
             result.append(w[2:] + "quay")
 
         else:
-            # Find the first vowel
             i = 0
             while i < len(w) and w[i] not in vowels:
                 i += 1
@@ -141,7 +140,10 @@ def pig_latin(text):
             consonants = w[:i]
             rest = w[i:]
 
-            # Special handling for "qu" that appears after consonants
+            if consonants.endswith("q") and rest.startswith("u"):
+                consonants = consonants + "u"
+                rest = rest[1:]
+
             if rest.startswith("qu"):
                 result.append(rest[2:] + consonants + "quay")
             else:
