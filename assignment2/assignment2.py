@@ -136,4 +136,24 @@ def create_minutes_set():
     return set1.union(set2)
 minutes_set = create_minutes_set()
 print("set1", "set2")
+
+# Task 14 Convert to datetime
+from datetime import datetime
+def create_minutes_list():
+    minutes_list = list(map(lambda x: (x[0], datetime.strptime(x[1], "%B %d, %Y")), list(minutes_set)))
+    return minutes_list
+minutes_list = create_minutes_list()
+print(minutes_list)
+
+# Task 15 Writing out Sorted List
+def write_sorted_list():
+    sorted_list = sorted(minutes_list, key=lambda x: x[1])
+    converted_list = list(map(lambda x: (x[0], x[1].strftime("%B %d, %Y")), sorted_list))
     
+    with open("./minutes.csv", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(minutes1["fields"])
+        writer.writerows(converted_list)
+    return converted_list
+minutes_sorted = write_sorted_list()
+print(minutes_sorted)
