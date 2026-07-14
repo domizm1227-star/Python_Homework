@@ -76,7 +76,8 @@ def employee_find_2(employee_id):
 
 # Task 7 Sorting the rows by last_name using lambda
 def sort_by_last_name():
-    employees["rows"].sort(key=lambda row: row[2].split()[-1])
+    last_name_column = column_index("last_name")
+    employees["rows"].sort(key=lambda row: row[last_name_column])
     return employees["rows"]
 
 # Task 8 Creating a dict for an employee
