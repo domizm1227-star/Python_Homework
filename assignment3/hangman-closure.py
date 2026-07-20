@@ -1,6 +1,8 @@
 # Task 4: Closure Practice
 def make_hangman(secret_word):
+    secret_word = secret_word.lower()
     guesses = []
+    
     # defining inner function
     def hangman_closure(letter):
         # record guess
@@ -13,15 +15,13 @@ def make_hangman(secret_word):
                 displayed_word += char
             else:
                 displayed_word += "_"
-
-        # Return True if won, False otherwise
-        if "_" not in displayed_word:
-            return True
-        return displayed_word
-
+                
+        print(displayed_word)
+        
+        return displayed_word == secret_word
     return hangman_closure
 
-# Game Mainline
+# Implementing game
 secret = input("Enter the secret word to start the game: ").strip()
 
 # Creating closure instance
@@ -29,7 +29,7 @@ play_game = make_hangman(secret)
 
 is_game_over = False
 while not is_game_over:
-    guess = input("Guess a letter: ")
+    guess = input("Guess a letter: ").strip()
     
     if len(guess) == 1 and guess.isalpha():
         is_game_over = play_game(guess)
