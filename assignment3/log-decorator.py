@@ -2,59 +2,50 @@
 import logging
 from functools import wraps
 
-#one-time logging setup
 logger = logging.getLogger(__name__ + "_parameter_log")
 logger.setLevel(logging.INFO)
 logger.addHandler(logging.FileHandler("./decorator.log", "a"))
 
 def logger_decorator(func):
-    # Decorator logging function names, positional args, keyword args, and return value
+    # Decorator
     @wraps(func)
     def wrapper(*args, **kwargs):
-        # Logging function name
-        logger.log(logging.INFO, f"function: {func.__name__}")
-        
         # Positional parameters
-        if args:
-            logger.log(logging.INFO, f"positional parameters: {list(args)}")
-        else:
-            logger.log(logging.INFO, "positional parameters: none")
-
-        # Keyword parameters
-        if kwargs:
-            logger.log(logging.INFO, f"keyword parameters: {kwargs}")
-        else:
-            logger.log(logging.INFO, "keyword parameters: none")
+        pos_params = list(args) if args else "none"
         
-        # Calling original function
+        # Keyword parameters
+        kw_params = kwargs if kwargs else "none"
+        
         result = func(*args, **kwargs)
         
-        # log the return value 
-        logger.log(logging.INFO, f"return value: {result!r}")
+        logger.log(logging.INFO, f"function: {func.__name__}")
+        logger.log(logging.INFO, f"positional parameters: {pos_params}")
+        logger.log(logging.INFO, f"keyword parameters: {kw_params}")
+        logger.log(logging.INFO, f"return: {result}")
         
         return result
-
     return wrapper
 
-# Function with no parameters, returns nothing
+# Function with no parameters returning nothing
 @logger_decorator
-def greet():
+def no_params():
     print("Hello, World!")
+    return None
 
-# Function with variable positional arguments, returns True
+# Positional argument functions returning True
 @logger_decorator
-def check_args(*args):
+def var_positional(*args):
     return True
 
-# Function with variable keyword arguments, returns logger_decorator
+# Functions with variable keyword arguments that return the logger decorator
 @logger_decorator
-def kw_return(**kwargs):
+def var_keyword(**kwargs):
     return logger_decorator
 
-#Mainline calls
+# Mainline
 if __name__ == "__main__":
-    greet()
-    check_args(1, 2, 3, "candy")
-    kw_return (a=10, b=20, c="hello")
+    no_params()
+    var_positional(1, 2, 3, "apple")
+    var_keyword(a=10, b=20, c="hello")
     
-    print("Program finished. Check ./decorator.log for the logged output.")
+    print("Program finished. Check ./decorator.log")
