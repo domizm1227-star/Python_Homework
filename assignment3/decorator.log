@@ -1,0 +1,24 @@
+function: greet
+positional parameters: none
+keyword parameters: none
+return value: None
+function: check_args
+positional parameters: [1, 2, 3, 'candy']
+keyword parameters: none
+return value: True
+function: kw_return
+positional parameters: none
+keyword parameters: {'a': 10, 'b': 20, 'c': 'hello'}
+return value: <function logger_decorator at 0x0000021AE34E45C0>
+function: greet
+positional parameters: none
+keyword parameters: none
+return value: None
+function: check_args
+positional parameters: [1, 2, 3, 'candy']
+keyword parameters: none
+return value: True
+function: kw_return
+positional parameters: none
+keyword parameters: {'a': 10, 'b': 20, 'c': 'hello'}
+return value: <function logger_decorator at 0x000002C7BE5E45C0>
