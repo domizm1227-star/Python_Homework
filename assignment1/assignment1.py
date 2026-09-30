@@ -1,11 +1,16 @@
 # Write your code here.
 
 # Task 1: Hello
+def hello():
+    return "Hello!"
+
 print("A1: Hello!")
 
 # Task 2: Greet with a Formatted String
-name = "Dominique"
-print("A2: Hello", (name))
+def greet(name):
+    return f"Hello, {name}!"
+
+print("A2:", greet("Dominique"))
 
 # Task 3: Calculator
 def calc(a, b, operation="multiply"):
@@ -32,7 +37,7 @@ def calc(a, b, operation="multiply"):
         return "You can't divide by 0!"
     
     except TypeError:
-        return "You can't perform that operation with those values!"
+        return "You can't multiply those values!"
 
 
 result = calc(3, 6, "add")
@@ -42,7 +47,7 @@ result = calc(9, 0, "modulo")
 print("A3:", result)
 
 result = calc("y", "u", "subtract")
-print(result)
+print("A3:", result)
 
 # Task 4: Data Type Conversion
 def data_type_conversion(value, data_type):
