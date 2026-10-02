@@ -1,0 +1,15 @@
+function: say_hello
+positional parameters: none
+keyword parameters: none
+return: None
+
+function: positional_function
+positional parameters: ('apple', 'banana', 'orange')
+keyword parameters: none
+return: True
+
+function: keyword_function
+positional parameters: none
+keyword parameters: {'name': 'John', 'age': 25, 'city': 'Denver'}
+return: <function logger_decorator at 0x000001F4970CFAB0>
+
