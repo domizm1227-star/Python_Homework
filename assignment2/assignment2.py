@@ -229,7 +229,7 @@ def read_csv_as_tuples(file_path):
     return data
 
 # Define function read_minutes_csv
-def read_minutes_csv(file_name):
+def read_minutes():
     # Minutes1
     m1 = read_csv_as_tuples("../csv/minutes1.csv")
     # Minutes2
@@ -237,7 +237,7 @@ def read_minutes_csv(file_name):
     return m1, m2
 
 # Store results in global variables
-minutes1, minutes2 = read_minutes_csv()
+minutes1, minutes2 = read_minutes("../csv/minutes1.csv")
 
 print("Minutes 1:", minutes1)
 print("Minutes 2:", minutes2)
@@ -253,7 +253,7 @@ if __name__ == "__main__":
     
     
 # Task 13: Create minutes_set
-minutes1, minutes2 = read_minutes_csv("../csv/minutes1.csv")
+minutes1, minutes2 = read_minutes("../csv/minutes1.csv")
 
 # Define function create_minutes_set taking no arguments
 def create_minutes_set():
