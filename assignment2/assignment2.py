@@ -3,6 +3,7 @@
 import csv
 import sys
 import os
+import abc
 import custom_module
 from datetime import datetime
 
@@ -203,6 +204,10 @@ if __name__ == "__main__":
     
     
 # Task 12: Read minutes1.csv and minutes2.csv
+# Define paths to the minutes CSV files
+minutes1_path = "../csv/minutes1.csv"
+minutes2_path = "../csv/minutes2.csv"
+
 # Define function read_csv_as_tuples
 def read_csv_as_tuples(file_path):
     data = {}
@@ -230,14 +235,12 @@ def read_csv_as_tuples(file_path):
 
 # Define function read_minutes_csv
 def read_minutes():
-    # Minutes1
-    m1 = read_csv_as_tuples("../csv/minutes1.csv")
-    # Minutes2
-    m2 = read_csv_as_tuples("../csv/minutes2.csv")
+    m1 = read_csv_as_tuples(minutes1_path)
+    m2 = read_csv_as_tuples(minutes2_path)
     return m1, m2
 
 # Store results in global variables
-minutes1, minutes2 = read_minutes("../csv/minutes1.csv")
+minutes1, minutes2 = read_minutes()
 
 print("Minutes 1:", minutes1)
 print("Minutes 2:", minutes2)
@@ -252,8 +255,66 @@ if __name__ == "__main__":
     print("Updated custom_module secret:", custom_module.secret)
     
     
+class MinutesCSV(abc.ABC):
+
+    @abc.abstractmethod
+    def read(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def create_set(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def create_list(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def write_sorted_list(self, output_path="./minutes.csv"):
+        raise NotImplementedError
+
+
+class minutes1(MinutesCSV):
+
+    def __init__(self, csv_path="../csv/minutes1.csv"):
+        self.csv_path = csv_path
+        self.data = self.read()
+        self.minutes_set = self.create_set()
+        self.minutes_list = self.create_list()
+
+    def read(self):
+        return read_csv_as_tuples(self.csv_path)
+
+    def create_set(self):
+        return {tuple(row) for row in self.data["rows"]}
+
+    def create_list(self):
+        return [
+            (row[0], datetime.strptime(row[1], "%B %d, %Y"))
+            for row in self.minutes_set
+        ]
+
+    def write_sorted_list(self, output_path="./minutes.csv"):
+        ordered = sorted(self.minutes_list, key=lambda item: item[1])
+        converted = [
+            (employee_id, datetime.strftime(timestamp, "%B %d, %Y"))
+            for employee_id, timestamp in ordered
+        ]
+
+        try:
+            with open(output_path, mode="w", newline="", encoding="utf-8") as file:
+                writer = csv.writer(file)
+                writer.writerow(self.data["fields"])
+                writer.writerows(converted)
+        except Exception as e:
+            print(f"Error writing to {output_path}: {e}")
+            sys.exit(1)
+
+        return converted
+
+
 # Task 13: Create minutes_set
-minutes1, minutes2 = read_minutes("../csv/minutes1.csv")
+minutes1, minutes2 = read_minutes()
 
 # Define function create_minutes_set taking no arguments
 def create_minutes_set():
