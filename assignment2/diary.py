@@ -11,7 +11,7 @@ try:
             if line == "done for now":
                 break
             
-            prompt = "What else?"
+            prompt = "What else? "
             
 except Exception as e:
    trace_back = traceback.extract_tb(e.__traceback__)
