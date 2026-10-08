@@ -68,6 +68,8 @@ class Board:
                 if self.board_array[i][j] == " ":
                     cat = False
                     break
+            if not cat:
+                break
 
         if cat:
             return (True, "Cat's Game.")
