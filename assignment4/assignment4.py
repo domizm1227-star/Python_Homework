@@ -3,8 +3,7 @@ import json
 import numpy as np
 
 # Task 1: Intro to Pandas-Creating and Manipulating DataFrames
-
-# Step 1: Creating a DataFrame from a dictionary
+# 1: Create a DataFrame from a dictionary
 data = {
     'Name': ['Alice', 'Bob', 'Charlie'],
     'Age': [25, 30, 35],
@@ -12,25 +11,26 @@ data = {
 }
 
 task1_data_frame = pd.DataFrame(data)
-print("---Task 1 DataFrame---")
+print("Task 1.1 DataFrame:")
 print(task1_data_frame)
 
-# Step 2: Add a new column
+# 2: Add a new column
 task1_with_salary = task1_data_frame.copy()
 task1_with_salary['Salary'] = [70000, 80000, 90000]
 
-print("\n--- Task 1 DataFrame with Salary ---")
+print("\nTask 1.2 DataFrame with Salary:")
 print(task1_with_salary)
 
-# Step 3: Modify an existing column
+# 3: Modify an existing column
 task1_older = task1_with_salary.copy()
 task1_older['Age'] = task1_older['Age'] + 1
 
-print("\n--- Task 1 Older DataFrame ---")
+print("\nTask 1.3 Older DataFrame")
 print(task1_older)
 
-# Step 4: Saving the DataFrame as a CSV file
+# 4: Saving the DataFrame as a CSV file
 task1_older.to_csv('employees.csv', index=False)
+print("\nTask 1.4: Saved task1_older to employees.csv successfully.")
 
 # Task 2: Loading Data from CSV and JSON
 # Read data from CSV file
