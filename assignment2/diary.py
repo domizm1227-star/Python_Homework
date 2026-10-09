@@ -10,7 +10,7 @@ try:
             
             if line == "done for now":
                 break
-            
+                
             prompt = "What else? "
             
 except Exception as e:
